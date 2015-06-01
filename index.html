@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>jquery.animate by baijunjie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">jquery.animate</h1>
+      <h2 class="project-tagline">By CSS3 Transition, Support The .stop() method.</h2>
+      <a href="https://github.com/baijunjie/jquery.animate" class="btn">View on GitHub</a>
+      <a href="https://github.com/baijunjie/jquery.animate/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/baijunjie/jquery.animate/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jqueryanimate" class="anchor" href="#jqueryanimate" aria-hidden="true"><span class="octicon octicon-link"></span></a>jquery.animate</h1>
+
+<p>重写了 <b>jQuery.animate</b> 的默认行为，使它优先使用 <b>CSS3 Transition</b> 来实现动画。<br></p>
+
+<p>Rewrite the <b>jQuery.animate</b>'s default behavior, The priority use <b>CSS3 Transition</b> to achieve animation.<br></p>
+
+<h2>
+<a id="为什么使用--why-use" class="anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8--why-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>为什么使用？ / Why use?</h2>
+
+<p>这个插件是对 <b>jQuery.animate</b> 方法的改写，你不需要考虑修改你的代码，你只需要导入插件，就可以让你所有的 <b>jQuery</b> 动画转化为 <b>CSS3 Transition</b>。<br></p>
+
+<p>This plugin is the rewriting of <b>jQuery.animate</b> method, you do not need to consider modifying your code, you just need to include plug-in, can let all of your <b>jQuery</b> animation into <b>CSS3 Transition</b>.<br></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>将 <a href="https://github.com/baijunjie/jquery.animate/blob/master/jquery.animate.js">jquery.animate.js</a> 引在 jQuery 之后。<br>
+Just include <a href="https://github.com/baijunjie/jquery.animate/blob/master/jquery.animate.js">jquery.animate.js</a> after jQuery.<br></p>
+
+<div class="highlight highlight-html"><pre>
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>jquery.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>jquery.animate.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+</pre></div>
+
+<h2>
+<a id="csshook" class="anchor" href="#csshook" aria-hidden="true"><span class="octicon octicon-link"></span></a>cssHook</h2>
+
+<p>可以直接通过 <b>.css()</b> 方法来设置 <b>Transform</b> 属性。<br>
+Can be directly through the <b>.css()</b> method to set the <b>Transform</b> properties.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ x<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>100px<span class="pl-pds">"</span></span> });                       <span class="pl-c">//=&gt; translate(100px, 0)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ y<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>100%<span class="pl-pds">"</span></span> });                        <span class="pl-c">//=&gt; translate(0, 100%)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ translate<span class="pl-k">:</span> [<span class="pl-c1">200</span>,<span class="pl-c1">100</span>] });             <span class="pl-c">//=&gt; translate(200px, 100px)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ translate3d<span class="pl-k">:</span> [<span class="pl-c1">200</span>,<span class="pl-c1">100</span>,<span class="pl-c1">300</span>] });       <span class="pl-c">//=&gt; translate(200px, 100px) translateZ(300px) </span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scale<span class="pl-k">:</span> <span class="pl-c1">2</span> });                         <span class="pl-c">//=&gt; scale(2)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scaleX<span class="pl-k">:</span> <span class="pl-c1">3</span> });                        <span class="pl-c">//=&gt; scale(3,1)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scaleZ<span class="pl-k">:</span> <span class="pl-c1">2</span> });                        <span class="pl-c">//=&gt; scaleZ(2)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scale3d<span class="pl-k">:</span> [<span class="pl-c1">2</span>, <span class="pl-c1">1.5</span>, <span class="pl-c1">4</span>] });             <span class="pl-c">//=&gt; scale(2,1.5) scaleZ(4) </span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ rotate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>30deg<span class="pl-pds">"</span></span> });                  <span class="pl-c">//=&gt; rotate(30deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ rotateX<span class="pl-k">:</span> <span class="pl-c1">45</span> });                      <span class="pl-c">//=&gt; rotateX(45deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ rotateY<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>1rad<span class="pl-pds">"</span></span> });                  <span class="pl-c">//=&gt; rotateX(1rad)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ rotateZ<span class="pl-k">:</span> <span class="pl-c1">90</span> });                      <span class="pl-c">//=&gt; rotate(90deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ rotate3d<span class="pl-k">:</span> [<span class="pl-c1">60</span>,<span class="pl-c1">30</span>,<span class="pl-c1">90</span>] });             <span class="pl-c">//=&gt; rotateX(60deg) rotateY(30deg) rotate(90deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ skewX<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>30deg<span class="pl-pds">"</span></span> });                   <span class="pl-c">//=&gt; skewX(30deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ skewY<span class="pl-k">:</span> <span class="pl-c1">60</span> });                        <span class="pl-c">//=&gt; skewY(60deg)</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ skew<span class="pl-k">:</span> [<span class="pl-c1">30</span>,<span class="pl-c1">60</span>] });                    <span class="pl-c">//=&gt; skewX(30deg) skewY(60deg)</span></pre></div>
+
+<p>设置透视点。<br>
+Set perspective.<br></p>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">// Note the difference between</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ <span class="pl-s"><span class="pl-pds">"</span>perspective<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">100</span> });  <span class="pl-c">//=&gt;  perspective: 100px;</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ <span class="pl-s"><span class="pl-pds">"</span>pers<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">100</span> });         <span class="pl-c">//=&gt;  transform: perspective(100px);</span></pre></div>
+
+<p>读取属性值。<br>
+Read the attribute value.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ x<span class="pl-k">:</span> <span class="pl-c1">100</span> }).css(<span class="pl-s"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>);                       <span class="pl-c">//=&gt; "100px"</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ x<span class="pl-k">:</span> <span class="pl-c1">100</span>, y<span class="pl-k">:</span> <span class="pl-c1">200</span> }).css(<span class="pl-s"><span class="pl-pds">"</span>translate<span class="pl-pds">"</span></span>);       <span class="pl-c">//=&gt; ["100px", "200px"]</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scaleX<span class="pl-k">:</span> <span class="pl-c1">3</span>, scaleY<span class="pl-k">:</span> <span class="pl-c1">3</span> }).css(<span class="pl-s"><span class="pl-pds">"</span>scale<span class="pl-pds">"</span></span>);     <span class="pl-c">//=&gt; "3"</span>
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css({ scaleX<span class="pl-k">:</span> <span class="pl-c1">3</span> }).css(<span class="pl-s"><span class="pl-pds">"</span>scale<span class="pl-pds">"</span></span>);                <span class="pl-c">//=&gt; ["3","1"]</span>
+</pre></div>
+
+<p>支持删除属性。<br>
+Support delete attributes.<br></p>
+
+<div class="highlight highlight-js"><pre>.css({ translate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>2, 5<span class="pl-pds">"</span></span> });                 <span class="pl-c">//=&gt; "translate(2px, 5px)"</span>
+.css({ translate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> });                     <span class="pl-c">//=&gt; remove "translate(2px, 5px)"</span>
+.css({ scale<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>2,3<span class="pl-pds">"</span></span> }).css({ scaleX<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> });  <span class="pl-c">//=&gt; "scale(1, 3)"</span></pre></div>
+
+<h2>
+<a id="animate" class="anchor" href="#animate" aria-hidden="true"><span class="octicon octicon-link"></span></a>animate</h2>
+
+<p>支持 <b>jQuery.animate</b> 原生的所有写法。<br>
+Support all <b>jQuery.animate</b> native writing.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).hide(<span class="pl-c1">2000</span>);
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).hide().slideDown(<span class="pl-c1">2000</span>, <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span>);
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).hide().fadeIn(<span class="pl-c1">2000</span>, <span class="pl-k">function</span>() { ... });
+
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({left<span class="pl-k">:</span> <span class="pl-c1">100</span>});
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({x<span class="pl-k">:</span> <span class="pl-c1">200</span>}, <span class="pl-c1">1000</span>, <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span>, <span class="pl-k">function</span>() { ... });
+
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({opacity<span class="pl-k">:</span> <span class="pl-c1">0</span>},{
+    queue<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    duration<span class="pl-k">:</span> <span class="pl-c1">2000</span>,
+    easing<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>
+});
+
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({
+    left<span class="pl-k">:</span> [<span class="pl-c1">100</span>, <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>],
+    top<span class="pl-k">:</span> [<span class="pl-c1">200</span>, <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span>],
+    scale<span class="pl-k">:</span> [[<span class="pl-c1">2</span>,<span class="pl-c1">3</span>], <span class="pl-s"><span class="pl-pds">"</span>easeInBack<span class="pl-pds">"</span></span>]
+});
+
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({
+    left<span class="pl-k">:</span> <span class="pl-c1">100</span>,
+    top<span class="pl-k">:</span> <span class="pl-c1">200</span>
+},{
+    queue<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    duration<span class="pl-k">:</span> <span class="pl-c1">2000</span>,
+    specialEasing<span class="pl-k">:</span> {
+        left<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>,
+        top<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span>
+    }
+});</pre></div>
+
+<p><b>Transform</b> 属性还支持特殊的写法。<br>
+<b>Transform</b> properties also supports special writing.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>scale<span class="pl-pds">"</span></span><span class="pl-k">:</span> [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>] });
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>rotate3d<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>30,20,90<span class="pl-pds">"</span></span> });</pre></div>
+
+<p>支持复合属性的动画。<br>
+To support the animation of the composite properties.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>border-radius<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>10px 20px 30px 40px<span class="pl-pds">"</span></span> });
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>transform-origin<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>100px 300px<span class="pl-pds">"</span></span> });
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>box-shadow<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>inset 50px 50px 1px #000<span class="pl-pds">"</span></span>});</pre></div>
+
+<p>可以完美支持 <b>.stop()</b> 以及 <b>.finish()</b> 方法。<br>
+Can perfect support <b>.stop()</b> and <b>.finish()</b> method.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ x<span class="pl-k">:</span> <span class="pl-c1">200</span> }, <span class="pl-c1">2000</span>, <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>);
+<span class="pl-c1">window</span>.<span class="pl-c1">setTimeout</span>(<span class="pl-k">function</span>() {
+    $(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).<span class="pl-c1">stop</span>();
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css(<span class="pl-s"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>));  <span class="pl-c">//=&gt; 100px</span>
+}, <span class="pl-c1">1000</span>);</pre></div>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ x<span class="pl-k">:</span> <span class="pl-c1">200</span> }, <span class="pl-c1">2000</span>, <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>);
+$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).finish();
+<span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).css(<span class="pl-s"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>));  <span class="pl-c">//=&gt; 200px</span></pre></div>
+
+<p>现在可以支持颜色动画了，并且可以使用 <b>.stop()</b> 方法停止到某个颜色值。<br>
+Can support color animation now, and you can use the <b>.stop()</b> method to stop to a color value.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({ <span class="pl-s"><span class="pl-pds">"</span>background-color<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>black<span class="pl-pds">"</span></span> }, <span class="pl-c1">5000</span>);</pre></div>
+
+<p>注意，由于 <b>CSS3 Transition</b> 动画的只支持三次贝塞尔曲线，因此<a href="https://github.com/gdsmith/jquery.easing">jQuery.easing</a>中的某些缓动无法支持，比如：Bounce。<br>
+如果使用了它不支持的 <b>Easing</b>，那么将会使用原来的 <b>jQuery.animate</b> 方法来实现该动画。<br></p>
+
+<p>Note that because of <b>CSS3 Transition</b> animation support only three times bezier curve, so some slow moving in <a href="https://github.com/gdsmith/jquery.easing">jQuery.easing</a> cannot support, such as: Bounce.<br>
+If use it does not support <b>Easing</b>, We will use the original <b>jQuery.animate</b> methods to achieve this animation.<br></p>
+
+<p>同时，所有的 <b>Transform</b> 属性不能分别设置 <b>Easing</b>，因为他们的 <b>Transition</b> 都是通过 <b>Transform</b> 属性来设置的。<br>
+<del>因此，如果发生这种情况，那么只有第一个 <b>Easing</b> 将作为 <b>transition-timing-function</b>。</del><br>
+因为原则上应该优先兼容动画效果，因此这种情况下，将会使用原来的 <b>jQuery.animate</b> 方法来实现该动画。<br></p>
+
+<p>Meanwhile, all the <b>Transform</b> property can not be separately set <b>Easing</b>, because their <b>Transition</b> through <b>Transform</b> property to set the.<br>
+<del>So, if this happens, only the first <b>Easing</b> will serve as <b>transition-timing-function</b>.</del><br>
+Because in principle should be the priority compatible animation effects, so in this case, will use the original <b>jQuery.animate</b> ways to implement this animation.<br></p>
+
+<div class="highlight highlight-js"><pre>$(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>).animate({
+    x<span class="pl-k">:</span> [<span class="pl-c1">300</span>, <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span>],
+    y<span class="pl-k">:</span> [<span class="pl-c1">200</span>, <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span>],
+    scale<span class="pl-k">:</span> [<span class="pl-c1">3</span>, <span class="pl-s"><span class="pl-pds">"</span>easeInBack<span class="pl-pds">"</span></span>]
+});
+
+<span class="pl-c">// CSS will be like this</span>
+div {
+    transform<span class="pl-k">:</span> translate(300px, 200px) scale(<span class="pl-c1">3</span>);
+    transition<span class="pl-k">:</span> transform 2000ms easeOutBack;
+}
+</pre></div>
+
+<p>以下是插件支持的缓动列表。<br>
+The following is a list of transit support slow.<br></p>
+
+<div class="highlight highlight-js"><pre>$.cssEase <span class="pl-k">=</span> {
+    <span class="pl-s"><span class="pl-pds">"</span>_default<span class="pl-pds">"</span></span><span class="pl-k">:</span>       <span class="pl-s"><span class="pl-pds">"</span>swing<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>swing<span class="pl-pds">"</span></span><span class="pl-k">:</span>          <span class="pl-s"><span class="pl-pds">"</span>easeOutQuad<span class="pl-pds">"</span></span>, <span class="pl-c">// 和 jQuery Easing 相同，查看详情 https://github.com/gdsmith/jquery.easing</span>
+    <span class="pl-s"><span class="pl-pds">"</span>linear<span class="pl-pds">"</span></span><span class="pl-k">:</span>         <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(0,0,1,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ease<span class="pl-pds">"</span></span><span class="pl-k">:</span>           <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.25,.1,.25,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ease-in<span class="pl-pds">"</span></span><span class="pl-k">:</span>        <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.42,0,1,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ease-out<span class="pl-pds">"</span></span><span class="pl-k">:</span>       <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(0,0,.58,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>ease-in-out<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.42,0,.58,1)<span class="pl-pds">"</span></span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>easeInCubic<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.550,.055,.675,.190)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutCubic<span class="pl-pds">"</span></span><span class="pl-k">:</span>   <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.215,.61,.355,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutCubic<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.645,.045,.355,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInCirc<span class="pl-pds">"</span></span><span class="pl-k">:</span>     <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.6,.04,.98,.335)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutCirc<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.075,.82,.165,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutCirc<span class="pl-pds">"</span></span><span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.785,.135,.15,.86)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInExpo<span class="pl-pds">"</span></span><span class="pl-k">:</span>     <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.95,.05,.795,.035)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutExpo<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.19,1,.22,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutExpo<span class="pl-pds">"</span></span><span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(1,0,0,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInQuad<span class="pl-pds">"</span></span><span class="pl-k">:</span>     <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.55,.085,.68,.53)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutQuad<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.25,.46,.45,.94)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutQuad<span class="pl-pds">"</span></span><span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.455,.03,.515,.955)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInQuart<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.895,.03,.685,.22)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutQuart<span class="pl-pds">"</span></span><span class="pl-k">:</span>   <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.165,.84,.44,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutQuart<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.77,0,.175,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInQuint<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.755,.05,.855,.06)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutQuint<span class="pl-pds">"</span></span><span class="pl-k">:</span>   <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.23,1,.32,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutQuint<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.86,0,.07,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInSine<span class="pl-pds">"</span></span><span class="pl-k">:</span>     <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.47,0,.745,.715)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutSine<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.39,.575,.565,1)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutSine<span class="pl-pds">"</span></span><span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.445,.05,.55,.95)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInBack<span class="pl-pds">"</span></span><span class="pl-k">:</span>     <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.6,-.28,.735,.045)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeOutBack<span class="pl-pds">"</span></span><span class="pl-k">:</span>    <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.175, .885,.32,1.275)<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>easeInOutBack<span class="pl-pds">"</span></span><span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">"</span>cubic-bezier(.68,-.55,.265,1.55)<span class="pl-pds">"</span></span>
+};</pre></div>
+
+<h1>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h1>
+
+<h2>
+<a id="v160" class="anchor" href="#v160" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.6.0</h2>
+
+<ul>
+<li>集成了 <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Easing v1.3</a>
+</li>
+<li>集成了 <a href="https://github.com/gnarf37/jquery-requestAnimationFrame">jQuery requestAnimationFrame - v0.1.3pre</a>
+</li>
+</ul>
+
+<h2>
+<a id="v152" class="anchor" href="#v152" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.5.2</h2>
+
+<ul>
+<li>修复了一个严重的 bug，该 bug 导致动画队列不正常。</li>
+</ul>
+
+<h2>
+<a id="v151" class="anchor" href="#v151" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.5.1</h2>
+
+<ul>
+<li>现在可以支持 text-shadow 和 box-shadow 的阴影动画了</li>
+</ul>
+
+<h2>
+<a id="v142" class="anchor" href="#v142" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.4.2</h2>
+
+<ul>
+<li>现在可以正确的识别递增和递减值了，例如：$("div").animate({ left: "+=100%" });</li>
+</ul>
+
+<h2>
+<a id="v141" class="anchor" href="#v141" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.4.1</h2>
+
+<ul>
+<li>优化代码结构</li>
+<li>当为 transform 中的属性分别设置了不同的 easing 时，现在改为使用原来的 <b>jQuery.animate</b> 方法来实现该动画</li>
+</ul>
+
+<h2>
+<a id="v14" class="anchor" href="#v14" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.4</h2>
+
+<ul>
+<li>现在支持复合属性的动画了</li>
+<li>区分开透视点的两种设置方法</li>
+</ul>
+
+<h2>
+<a id="v13" class="anchor" href="#v13" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.3</h2>
+
+<ul>
+<li>修正了一个严重的 bug</li>
+<li>弃用 transitionend 事件</li>
+</ul>
+
+<h2>
+<a id="v12" class="anchor" href="#v12" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.2</h2>
+
+<ul>
+<li>添加了对颜色动画的支持</li>
+</ul>
+
+<h1>
+<a id="thanks" class="anchor" href="#thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Thanks</h1>
+
+<p>这个插件是参考以下插件编写的，感谢作者！<br> 
+This plug-in is written in reference to the following plug-ins, thanks to the author!<br></p>
+
+<p><strong><a href="https://github.com/rstacruz/jquery.transit">jquery.transit</a></strong><br>
+<strong><a href="https://github.com/heygrady/transform/">jQuery 2D transformations</a></strong><br>
+<strong><a href="https://github.com/MilesOkeefe/jquery.animate-colors">jquery.animate-colors</a></strong><br>
+<strong><a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Easing v1.3</a></strong><br>
+<strong><a href="https://github.com/gnarf37/jquery-requestAnimationFrame">jQuery requestAnimationFrame - v0.1.3pre</a></strong><br></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/baijunjie/jquery.animate">jquery.animate</a> is maintained by <a href="https://github.com/baijunjie">baijunjie</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
